@@ -32,6 +32,7 @@ function buildBoard() {
         for (var j = 0; j < gLevel.SIZE; j++) {
             board[i][j] = {
                 minesAroundCount: 0,
+                // color,
                 isShown: false,
                 isMine: false,
                 isMarked: false
@@ -68,8 +69,9 @@ function cellClicked(elCell, i, j) {
         return
     }
 
-
-    elCell.innerText = gBoard[i][j].minesAroundCount
+    var minesAroundCount = gBoard[i][j].minesAroundCount
+    elCell.innerText = minesAroundCount === 0 ? EMPTY : minesAroundCount
+    elCell.classList.add('clicked')
     gGame.shownCount++
 
     if (!gGame.isFirstClick) {
@@ -99,7 +101,7 @@ function cellMarked(elCell) {
 function checkGameOver() {
     const isGameOver = (gGame.markedCount === gLevel.MINES &&
         gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES))
-        console.log(isGameOver);
+    console.log(isGameOver);
     if (isGameOver) clearInterval(gTimerInterval)
     gGame.isOn = !isGameOver
 }
@@ -115,8 +117,10 @@ function expandShown(board, elCell, iPos, jPos) {
                 board[i][j].isShown = true
                 gGame.shownCount++
                 const elExpanded = document.querySelector(`#cell-${i}-${j}`)
+                elExpanded.classList.add('clicked')
                 elExpanded.innerText = board[i][j].minesAroundCount
                 if (board[i][j].minesAroundCount === 0) {
+                    elExpanded.innerText = EMPTY
                     expandShown(gBoard, elCell, i, j)
                 }
             }
@@ -154,6 +158,35 @@ function onMineClick() {
         for (var j = 0; j < gBoard[0].length; j++) {
             if (gBoard[i][j].isMine) renderCell({ i, j }, MINE)
         }
+    }
+}
+
+function onChangeLevel(elLevel, level) {
+    switch (level) {
+        case 'beginner':
+            gLevel.SIZE = 4
+            gLevel.MINES = 2
+            document.querySelector('.medium').classList.remove('active')
+            document.querySelector('.expert').classList.remove('active')
+            elLevel.classList.add('active')
+            initGame()
+            break;
+        case 'medium':
+            gLevel.SIZE = 8
+            gLevel.MINES = 14
+            document.querySelector('.beginner').classList.remove('active')
+            document.querySelector('.expert').classList.remove('active')
+            elLevel.classList.add('active')
+            initGame()
+            break;
+        case 'expert':
+            gLevel.SIZE = 12
+            gLevel.MINES = 32
+            document.querySelector('.beginner').classList.remove('active')
+            document.querySelector('.medium').classList.remove('active')
+            elLevel.classList.add('active')
+            initGame()
+            break;
     }
 }
 

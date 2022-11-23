@@ -11,8 +11,13 @@
 
 <body onload="initGame()">
 
-    <div class="game-conteiner">
-        <h1>HI</h1>
+    <div class="game-container">
+        <h1>Mine Sweeper</h1>
+        <ul class="level-nav">
+            <li onclick="onChangeLevel(this, 'beginner')" class="navbar-li beginner active">Beginner</li>
+            <li onclick="onChangeLevel(this, 'medium')" class="navbar-li medium">Medium</li>
+            <li onclick="onChangeLevel(this, 'expert')" class="navbar-li expert">Expert</li>
+        </ul>
         <h2 class="time"><span class="time">000</span>⏲️</h2>
         <div class="board-container" oncontextmenu="return false;">
 
