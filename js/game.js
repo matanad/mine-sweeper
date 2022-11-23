@@ -101,7 +101,7 @@ function cellClicked(elCell, i, j) {
     // elCell.innerHTML = minesAroundCount === 0 ? EMPTY : minesAroundCount
     if (minesAroundCount === 0) {
         elCell.innerHTML = EMPTY
-    }else{
+    } else {
         elCell.innerHTML = minesAroundCount
         elCell.style.color = gBoard[i][j].color
     }
@@ -206,14 +206,28 @@ function onMineClick() {
     console.log(live);
     gGame.lives--
     if (gGame.lives > 0) return
+
+    bombAllMines()
+
+
+}
+
+function bombAllMines() {
+    const bombs = []
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[0].length; j++) {
             if (gBoard[i][j].isMine) {
-                renderCell({ i, j }, MINE)
+                bombs.push({ i, j })
             }
         }
     }
-
+    // debugger
+    var lenght = bombs.length
+    const bombInterval = setInterval(() => {
+            const randBomb = drawCell(bombs)
+            renderCell(randBomb, MINE)
+        if (bombs.length === 0)  clearInterval(bombInterval)
+    }, 100);
 }
 
 function onChangeLevel(elLevel, level) {
