@@ -5,7 +5,7 @@ const MINE = '💣'
 const FLAG = '🚩'
 
 var gBoard
-var gLevel = { SIZE: 10, MINES: 5 }
+var gLevel = { SIZE: 4, MINES: 2 }
 var gGame
 var gStartTime
 var gTimerInterval
@@ -70,6 +70,7 @@ function cellClicked(elCell, i, j) {
 
 
     elCell.innerText = gBoard[i][j].minesAroundCount
+    gGame.shownCount++
 
     if (!gGame.isFirstClick) {
         expandShown(gBoard, elCell, i, j)
@@ -98,13 +99,13 @@ function cellMarked(elCell) {
 function checkGameOver() {
     const isGameOver = (gGame.markedCount === gLevel.MINES &&
         gGame.shownCount === (gLevel.SIZE ** 2 - gLevel.MINES))
+        console.log(isGameOver);
     if (isGameOver) clearInterval(gTimerInterval)
     gGame.isOn = !isGameOver
 }
 
 function expandShown(board, elCell, iPos, jPos) {
     if (elCell.innerText === MINE || +elCell.innerText > 0) return
-    gGame.shownCount++
     for (var i = iPos - 1; i <= iPos + 1; i++) {
         if (i < 0 || i > board.length - 1) continue
         for (var j = jPos - 1; j <= jPos + 1; j++) {
