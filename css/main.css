@@ -58,6 +58,7 @@ h2 {
     padding: 0;
     background-color: #028090;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 li {
@@ -104,11 +105,12 @@ table {
 .cell {
     background-color: #028090;
     color: #F1FAEE;
-    border: solid 1px #00A896;
+    border: solid 1px #00a896ab;
     height: 1.6rem;
     width: 1.6rem;
     font-size: 1.25rem;
     cursor: pointer;
+    box-shadow: inset 0px 0px 3.5px 0.5px #00a896ab;
 }
 
 .clicked {
@@ -163,6 +165,7 @@ table {
     padding: 2rem;
     border: .1px solid #02c39933;
     border-radius: 22px;
+    box-shadow: inset 0px 0px 3.5px 0.5px #00a896ab;
 }
 
 img {
