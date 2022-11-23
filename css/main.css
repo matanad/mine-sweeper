@@ -84,3 +84,7 @@ td{
     bottom: 0;
     color: whitesmoke;
 }
+
+.elements {
+    display: inline;
+}
