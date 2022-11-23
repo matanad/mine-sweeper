@@ -25,6 +25,8 @@ function initGame() {
         secsPassed: 0,
         lives: 3
     }
+    const elSmile = document.querySelector('.smile')
+    elSmile.innerText = NORMAL
     const elLives = document.querySelector('.lives')
     elLives.innerText = LIVE
     elLives.innerText += LIVE
@@ -52,10 +54,14 @@ function buildBoard() {
 }
 
 function cellClicked(elCell, i, j) {
+    // if the cell already shown or marked or game is not on - do nothing
     if (gBoard[i][j].isShown || gBoard[i][j].isMarked || !gGame.isOn) return
+
+    const elSmile = document.querySelector('.smile')
     gBoard[i][j].isShown = true
     gBoard[i][j].isMarked = true
 
+    // first move
     if (gGame.isFirstClick) {
         locateMines(gBoard, i, j)
 
@@ -67,24 +73,35 @@ function cellClicked(elCell, i, j) {
         gGame.isFirstClick = false
         startTimer()
 
+        // not first move and mine clicked
     } else if (gBoard[i][j].isMine) {
+        elSmile.innerText = LOSE
         gBoard[i][j].isShown = true
         gBoard[i][j].isMarked = true
         elCell.innerText = MINE
         onMineClick()
         elCell.style.backgroundColor = 'red'
-        if (checkGameOver()) clearInterval(gTimerInterval)
+        if (checkGameOver()) {
+            gGame.isOn = false
+            clearInterval(gTimerInterval)
+        }
         return
     }
 
+    elSmile.innerText = NORMAL
     var minesAroundCount = gBoard[i][j].minesAroundCount
     elCell.innerText = minesAroundCount === 0 ? EMPTY : minesAroundCount
     elCell.classList.add('clicked')
     gGame.shownCount++
 
+    // not first move
     if (!gGame.isFirstClick) {
         expandShown(gBoard, elCell, i, j)
-        if (checkGameOver()) clearInterval(gTimerInterval)
+        if (checkGameOver()) {
+            gGame.isOn = false
+            elSmile.innerText = WIN
+            clearInterval(gTimerInterval)
+        }
     }
 }
 
@@ -113,7 +130,7 @@ function checkGameOver() {
         return true
     } else if (gGame.lives === 0) {
         return true
-    }else if(isAllCellsShown){
+    } else if (isAllCellsShown) {
         return true
     }
     return false

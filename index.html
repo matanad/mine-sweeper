@@ -11,21 +11,21 @@
 
 <body onload="initGame()">
 
+    <h1>Mine Sweeper</h1>
     <div class="game-container">
-        <h1>Mine Sweeper</h1>
         <ul class="level-nav">
             <li onclick="onChangeLevel(this, 'beginner')" class="navbar-li beginner active">Beginner</li>
             <li onclick="onChangeLevel(this, 'medium')" class="navbar-li medium">Medium</li>
             <li onclick="onChangeLevel(this, 'expert')" class="navbar-li expert">Expert</li>
         </ul>
         <div class="elements">
+            <h2 class="smile" onclick="initGame()">😃</h2>
             <h2 class="time"><span class="time">000</span>⏲️</h2>
             <h2 class="lives">❤️❤️❤️</h2>
         </div>
-        <div class="board-container" oncontextmenu="return false;">
+    </div>
+    <div class="board-container" oncontextmenu="return false;">
 
-        </div>
-        <button onclick="initGame()">Restart</button>
     </div>
     <div class="footer">Made by: Matan Adi</div>
 
