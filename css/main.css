@@ -1,17 +1,25 @@
+*{
+    margin: 0;
+    pad: 0;
+}
+
 body {
-    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90vh;
     text-align: center;
-    background-color: #274355;
+    background-color: #05668D;
 }
 
 h1 {
     margin: 15px 30px;
-    color: whitesmoke;
+    color: #eff0d4;
 }
 
 h2{
-    color: whitesmoke;
+    display: inline;
+    color: #eff0d4;
     margin-bottom: 15px;
+    margin: 15px;
 }
 
 .game-container {
@@ -36,20 +44,20 @@ h2{
     font-weight: bold;
     display: flex;
     list-style: none;
-    margin: 0;
+    margin:  15px 0px;
     padding: 0;
-    background-color: #4c87af;
+    background-color: #028090;
 }
 
 li{
-    color: whitesmoke;
+    color: #f9fadf;
     width: 110px;
     padding: 15px;
     font-size: 15px;
 }
 
 li:hover{
-    background-color: #347097;
+    background-color: #00A896;
 }
 
 li:active{
@@ -57,7 +65,7 @@ li:active{
 }
 
 .active{
-    background-color: #2a5d80;
+    background-color: #02C39A;
 }
 
 table {
@@ -66,21 +74,21 @@ table {
 }
 
 td{
-    background-color: #4c87af;
-    color: whitesmoke;
-    border: solid 1px black;
+    background-color: #028090;
+    color: #F1FAEE;
+    border: solid 1px #00A896;
     height: 22px;
     width: 22px;
     /* transition: .5s; */
 }
 
 .clicked{
-    background-color: #2a5d80;
+    background-color: #05668D;
 }
 
 .footer{
     bottom: 0;
-    color: whitesmoke;
+    color: #eff0d4;
 }
 
 .elements {

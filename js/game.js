@@ -80,7 +80,7 @@ function cellClicked(elCell, i, j) {
         gBoard[i][j].isMarked = true
         elCell.innerText = MINE
         onMineClick()
-        elCell.style.backgroundColor = 'red'
+        elCell.style.backgroundColor = '#c33c54'
         if (checkGameOver()) {
             gGame.isOn = false
             clearInterval(gTimerInterval)
