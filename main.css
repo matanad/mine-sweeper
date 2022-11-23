@@ -155,7 +155,7 @@ table {
 }
 
 .more-container {
-    margin-top: auto;
+    /* margin-top: auto; */
     background-color: #02809046;
     min-width: 1rem;
     width: 26em;
