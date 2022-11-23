@@ -10,25 +10,26 @@
 </head>
 
 <body onload="initGame()">
+    <div class="more-container">
+        <h1>Mine Sweeper</h1>
+        <div class="game-container">
+            <ul class="level-nav">
+                <li onclick="onChangeLevel(this, 'beginner')" class="navbar-li beginner active">Beginner</li>
+                <li onclick="onChangeLevel(this, 'medium')" class="navbar-li medium">Medium</li>
+                <li onclick="onChangeLevel(this, 'expert')" class="navbar-li expert">Expert</li>
+            </ul>
+            <div class="elements">
+                <h2 class="time"><span class="time">000</span><img class="timer" src="img/timer.png"></h2>
 
-    <h1>Mine Sweeper</h1>
-    <div class="game-container">
-        <ul class="level-nav">
-            <li onclick="onChangeLevel(this, 'beginner')" class="navbar-li beginner active">Beginner</li>
-            <li onclick="onChangeLevel(this, 'medium')" class="navbar-li medium">Medium</li>
-            <li onclick="onChangeLevel(this, 'expert')" class="navbar-li expert">Expert</li>
-        </ul>
-        <div class="elements">
-            <h2 class="time"><span class="time">000</span>⏲️</h2>
-            <h2 class="smile" onclick="initGame()">😃</h2>
-            <h2 class="lives">❤️❤️❤️</h2>
+                <h2 class="smile" onclick="initGame()">😃</h2>
+                <h2 class="lives">Lives: ❤️❤️❤️</h2>
+            </div>
+        </div>
+        <div class="board-container" oncontextmenu="return false;">
+
         </div>
     </div>
-    <div class="board-container" oncontextmenu="return false;">
-
-    </div>
-    <div class="footer">Made by: Matan Adi</div>
-
+    <h3 class="footer">Made by: Matan Adi</h3>
     <script src="js/utils.js"></script>
     <script src="js/game.js"></script>
 </body>

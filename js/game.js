@@ -1,12 +1,19 @@
 'use strict'
 
 const EMPTY = ' '
-const MINE = '💣'
-const FLAG = '🚩'
+const MINE = '<img src="img/mine.png">'
+const FLAG = '<img src="img/flag.png">'
 const LIVE = '❤️'
 const NORMAL = '😃'
 const LOSE = '🤯'
 const WIN = '😎'
+
+//numbers colors
+const ONE = '#98c1d9'
+const TWO = '#e07a5f'
+const THREE = '#f4f1de'
+const FOUR = '#f2cc8f'
+const FIVE = '#3d405b'
 
 var gBoard
 var gLevel = { SIZE: 4, MINES: 2 }
@@ -43,10 +50,10 @@ function buildBoard() {
         for (var j = 0; j < gLevel.SIZE; j++) {
             board[i][j] = {
                 minesAroundCount: 0,
-                // color,
                 isShown: false,
                 isMine: false,
-                isMarked: false
+                isMarked: false,
+                color: ONE
             }
         }
     }
@@ -68,6 +75,7 @@ function cellClicked(elCell, i, j) {
         for (var iPos = 0; iPos < gLevel.SIZE; iPos++) {
             for (var jPos = 0; jPos < gLevel.SIZE; jPos++) {
                 gBoard[iPos][jPos].minesAroundCount = setMinesNegsCount(gBoard, iPos, jPos)
+                gBoard[iPos][jPos].color = getNumColor(gBoard[iPos][jPos].minesAroundCount)
             }
         }
         gGame.isFirstClick = false
@@ -75,10 +83,10 @@ function cellClicked(elCell, i, j) {
 
         // not first move and mine clicked
     } else if (gBoard[i][j].isMine) {
-        elSmile.innerText = LOSE
+        elSmile.innerHTML = LOSE
         gBoard[i][j].isShown = true
         gBoard[i][j].isMarked = true
-        elCell.innerText = MINE
+        elCell.innerHTML = MINE
         onMineClick()
         elCell.style.backgroundColor = '#c33c54'
         if (checkGameOver()) {
@@ -88,9 +96,15 @@ function cellClicked(elCell, i, j) {
         return
     }
 
-    elSmile.innerText = NORMAL
+    elSmile.innerHTML = NORMAL
     var minesAroundCount = gBoard[i][j].minesAroundCount
-    elCell.innerText = minesAroundCount === 0 ? EMPTY : minesAroundCount
+    // elCell.innerHTML = minesAroundCount === 0 ? EMPTY : minesAroundCount
+    if (minesAroundCount === 0) {
+        elCell.innerHTML = EMPTY
+    }else{
+        elCell.innerHTML = minesAroundCount
+        elCell.style.color = gBoard[i][j].color
+    }
     elCell.classList.add('clicked')
     gGame.shownCount++
 
@@ -99,7 +113,7 @@ function cellClicked(elCell, i, j) {
         expandShown(gBoard, elCell, i, j)
         if (checkGameOver()) {
             gGame.isOn = false
-            elSmile.innerText = WIN
+            elSmile.innerHTML = WIN
             clearInterval(gTimerInterval)
         }
     }
@@ -108,13 +122,13 @@ function cellClicked(elCell, i, j) {
 function cellMarked(elCell) {
     if (gGame.isOn) {
         const cellPos = getCellLocation(elCell)
-        if (elCell.innerText === FLAG) {
-            elCell.innerText = EMPTY
+        if (elCell.innerHTML === FLAG) {
+            elCell.innerHTML = EMPTY
             gGame.markedCount--
             gBoard[cellPos.i][cellPos.j].isMarked = false
             console.log(gBoard[cellPos.i][cellPos.j])
         } else if (!gBoard[cellPos.i][cellPos.j].isMarked) {
-            elCell.innerText = FLAG
+            elCell.innerHTML = FLAG
             gGame.markedCount++
             gBoard[cellPos.i][cellPos.j].isMarked = true
             console.log(gBoard[cellPos.i][cellPos.j])
@@ -137,7 +151,7 @@ function checkGameOver() {
 }
 
 function expandShown(board, elCell, iPos, jPos) {
-    if (elCell.innerText === MINE || +elCell.innerText > 0) return
+    if (elCell.innerHTML === MINE || +elCell.innerText > 0) return
     for (var i = iPos - 1; i <= iPos + 1; i++) {
         if (i < 0 || i > board.length - 1) continue
         for (var j = jPos - 1; j <= jPos + 1; j++) {
@@ -149,9 +163,10 @@ function expandShown(board, elCell, iPos, jPos) {
                 gGame.shownCount++
                 const elExpanded = document.querySelector(`#cell-${i}-${j}`)
                 elExpanded.classList.add('clicked')
-                elExpanded.innerText = board[i][j].minesAroundCount
+                elExpanded.innerHTML = board[i][j].minesAroundCount
+                elExpanded.style.color = gBoard[i][j].color
                 if (board[i][j].minesAroundCount === 0) {
-                    elExpanded.innerText = EMPTY
+                    elExpanded.innerHTML = EMPTY
                     expandShown(gBoard, elCell, i, j)
                 }
             }
@@ -246,4 +261,14 @@ function startTimer() {
 
 function addLeadingZeros(num, totalLength) {
     return String(num).padStart(totalLength, '0');
+}
+
+function getNumColor(num) {
+    switch (num) {
+        case 1: return ONE
+        case 2: return TWO
+        case 3: return THREE
+        case 4: return FOUR
+        default: return FIVE
+    }
 }
