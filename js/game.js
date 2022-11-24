@@ -32,7 +32,7 @@ function initGame() {
         mineShownCount: 0,
         markedCount: 0,
         secsPassed: 0,
-        lives: 2,
+        lives: 3,
         hints: 3,
         safeClicks: 3
     }
@@ -60,11 +60,11 @@ function renderStats() {
 
     // render hearts
     const elLives = document.querySelector('.lives')
-    elLives.innerText = LIVE + LIVE
-    if (gLevel.MINES > 2) {
-        elLives.innerText += LIVE
-        gGame.lives = 3
-    }
+    elLives.innerText = LIVE + LIVE + LIVE
+    // if (gLevel.MINES > 2) {
+    //     elLives.innerText += LIVE
+    //     gGame.lives = 3
+    // }
 
     document.querySelector('h2 .time').innerText = '000'
     const elSmile = document.querySelector('.smile')
@@ -105,7 +105,7 @@ function cellClicked(elCell, i, j) {
     if (gGame.isFirstClick) firstMove(i, j)
 
 
-    // not first move and mine clicked
+    // on mine clicked
     if (currCell.isMine) {
         elSmile.innerHTML = LOSE
         currCell.isShown = true
@@ -170,6 +170,7 @@ function checkGameOver() {
 
     if ((isAllMinesMarked && isAllCellsShown)) return true
     if (gGame.lives === 0) return true
+    if (gGame.mineShownCount === gLevel.MINES) return true
     if (gGame.mineShownCount < 3 && isAllCellsShown && gGame.mineShownCount + gGame.markedCount === gLevel.MINES) return true
 
     return false
