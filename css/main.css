@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600;8..144,700&display=swap');
 
-@media only screen and (max-width: 700px) {
-    html {
-        font-size: 0.7rem;
-    }
-}
+
 
 html {
     margin: 0;
@@ -53,7 +49,7 @@ h4 {
 
 .board-container {
     display: flex;
-    height: 28rem;
+    height: 26rem;
     align-items: center;
     justify-content: center;
 }
@@ -109,17 +105,18 @@ table {
     display: inline-block;
     justify-self: center;
     border-spacing: 1px;
+    cursor: pointer;
 }
 
 .cell {
     background-color: #028090;
     color: #F1FAEE;
-    height: 1.8rem;
-    width: 1.8rem;
-    font-size: 1.5rem;
-    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
+    font-size: 1.2rem;
     border: solid 0.5px #00a89682;
     box-shadow: inset 0px 0px 3.5px 0.5px #00a896;
+    transition: 0.5s;
 }
 
 .clicked {
@@ -216,11 +213,28 @@ table {
 
 .hint {
     cursor: pointer;
-    
+
 }
 
-.safe-cell{
+.safe-cell {
     background-color: #0dff0038;
     border: solid 0.5px #00a84182;
     box-shadow: inset 0px 0px 3.5px 0.5px #00a81c;
+}
+
+@media only screen and (max-width: 700px) {
+    html {
+        font-size: 0.7rem;
+    }
+
+    .more-container {
+        width: 22em;
+    }
+    
+}
+
+li {
+    width: 5rem;
+    padding: 1rem;
+    font-size: .7rem;
 }

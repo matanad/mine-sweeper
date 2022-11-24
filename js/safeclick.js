@@ -3,7 +3,7 @@
 var isSafeProcces = false
 
 function onSafeClick(elSafe) {
-    if (gGame.safeClicks === 0 || isSafeProcces) return
+    if (gGame.safeClicks === 0 || isSafeProcces || !gGame.isOn) return
 
     isSafeProcces = true
     gGame.safeClicks--

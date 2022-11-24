@@ -26,7 +26,8 @@ function initGame() {
     gGame = {
         isOn: true,
         isFirstClick: true,
-        isHint: false,
+        isHintMode: false,
+        isManualMode: false,
         shownCount: 0,
         mineShownCount: 0,
         markedCount: 0,
@@ -35,33 +36,39 @@ function initGame() {
         hints: 3,
         safeClicks: 3
     }
-    renderBestScore()
+    renderManualBtnOnInit()
+    renderStats()
     renderHints()
+    if (gBombInterval) clearInterval(gBombInterval)
+    if (gTimerInterval) clearInterval(gTimerInterval)
+    
+    // 
+    gBoard = buildBoard()
+    renderBoard(gBoard, '.board-container')
+}
+
+function renderStats() {
+    // Best Score from memory
+    const score = getBestScore(gLevel.level)
+    const elBestScore = document.querySelector('.best-score')
+    if (score) elBestScore.innerHTML = getBestScore(gLevel.level)
+    else elBestScore.innerHTML = '000'
+
+    // Showing the safe btn
+    const elSafeBtn = document.querySelector('.safe')
+    elSafeBtn.style.opacity = 1
+
+    // render hearts
     const elLives = document.querySelector('.lives')
     elLives.innerText = LIVE + LIVE
     if (gLevel.MINES > 2) {
         elLives.innerText += LIVE
         gGame.lives = 3
     }
-    clearInterval(gBombInterval)
-    if (gTimerInterval) clearInterval(gTimerInterval)
+
     document.querySelector('h2 .time').innerText = '000'
     const elSmile = document.querySelector('.smile')
     elSmile.innerText = NORMAL
-    // 
-    gBoard = buildBoard()
-    renderBoard(gBoard, '.board-container')
-}
-
-function onGameStart() {
-
-}
-
-function renderBestScore() {
-    const score = getBestScore(gLevel.level)
-    const elBestScore = document.querySelector('.best-score')
-    if (score) elBestScore.innerHTML = getBestScore(gLevel.level)
-    else elBestScore.innerHTML = '000'
 }
 
 function buildBoard() {
@@ -88,13 +95,14 @@ function cellClicked(elCell, i, j) {
 
 
     if (gGame.isHint && gGame.shownCount !== 0) return onHintCellCLicked(i, j)
+    if (gGame.isManualMode) return manualModeClicked(elCell, i, j)
 
     const elSmile = document.querySelector('.smile')
     currCell.isShown = true
     currCell.isMarked = true
 
     // first move - locate mines and count mines negs
-    if (gGame.shownCount === 0) firstMove(i, j)
+    if (gGame.isFirstClick) firstMove(i, j)
 
 
     // not first move and mine clicked
@@ -128,9 +136,14 @@ function cellClicked(elCell, i, j) {
 }
 
 function firstMove(i, j) {
+    gGame.isFirstClick = false
     locateMines(gBoard, i, j)
     setMinesNegsCount(gBoard)
     startTimer()
+
+    const elManual = document.querySelector('.manual')
+    elManual.style.opacity = '0.3'
+    elManual.style.cursor = 'default'
 }
 
 function cellMarked(elCell) {
@@ -203,9 +216,9 @@ function checkMinesNegsCount(board, iPos, jPos) {
 function locateMines(board, iPos, jPos) {
     var emptyCells = getEmptyCells(board)
     if (!emptyCells) return
-    for (var i = 0; i < gLevel.MINES; i++) {
+    for (var i = 0; i < gLevel.MINES - gPlacedMines; i++) {
         var emptyCell = drawRandomCell(emptyCells)
-        if (emptyCell.i === iPos && emptyCell.j === jPos) {
+        if (emptyCell.i === iPos && emptyCell.j === jPos || gBoard[emptyCell.i][emptyCell.j].isMine) {
             emptyCell = drawRandomCell(emptyCells)
         }
         board[emptyCell.i][emptyCell.j].isMine = true

@@ -3,6 +3,7 @@
 const HINT = '💡'
 
 function onHintClicked(elHint) {
+    if (gGame.isFirstClick) return
     if (gGame.hints === 0) return
     gGame.isHint = !gGame.isHint
     if (!gGame.isHint) {
