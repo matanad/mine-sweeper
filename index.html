@@ -12,6 +12,7 @@
 <body onload="initGame()">
     <div class="more-container">
         <h1>Mine Sweeper</h1>
+        <h4>Best Score: <span class="best-score">000</span></h4>
         <div class="game-container">
             <ul class="level-nav">
                 <li onclick="onChangeLevel(this, 'beginner')" class="navbar-li beginner active">Beginner</li>
@@ -22,15 +23,27 @@
                 <h2 class="time"><span class="time">000</span><img class="timer" src="img/timer.png"></h2>
 
                 <h2 class="smile" onclick="initGame()">😃</h2>
-                <h2 class="lives">=❤️❤️❤️</h2>
+                <h2 class="lives"></h2>
             </div>
         </div>
         <div class="board-container" oncontextmenu="return false;">
 
         </div>
+        <div class="hint-container">
+            <!-- <img class="seven" src="img/seven.png"> -->
+            <span class="hint" onclick="onHintClicked(this)">💡💡💡</span>
+            <img class="safe"onclick="onSafeClick(this)" src="img/megaHint.png">
+            <!-- <img class="undo" src="img/undo.png">
+            <img class="undo" src="img/megaHint.png">
+            <img class="undo" src="img/exterminator.png"> -->
+        </div>
     </div>
     <h3 class="footer">Made by: Matan Adi</h3>
     <script src="js/utils.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/hint.js"></script>
+    <script src="js/local.js"></script>
+    <script src="js/safeclick.js"></script>
     <script src="js/game.js"></script>
 </body>
 

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600;8..144,700&display=swap');
 
 @media only screen and (max-width: 700px) {
-    html{
+    html {
         font-size: 0.7rem;
     }
 }
@@ -10,6 +10,7 @@ html {
     margin: 0;
     padding: 0;
     height: 100vh;
+    font-size: 15px;
 }
 
 body {
@@ -25,6 +26,8 @@ body {
     background-color: #05668D;
 }
 
+
+
 h1 {
     margin: 1rem 2rem;
     color: #eff0d4;
@@ -34,6 +37,11 @@ h2 {
     display: inline;
     color: #eff0d4;
     /* height: 47px; */
+}
+
+h4 {
+    margin: 0;
+    color: #eff0d4;
 }
 
 .game-container {
@@ -100,6 +108,7 @@ li:active {
 table {
     display: inline-block;
     justify-self: center;
+    border-spacing: 1px;
 }
 
 .cell {
@@ -109,11 +118,14 @@ table {
     width: 1.8rem;
     font-size: 1.5rem;
     cursor: pointer;
+    border: solid 0.5px #00a89682;
     box-shadow: inset 0px 0px 3.5px 0.5px #00a896;
 }
 
 .clicked {
     background-color: #05668D;
+    box-shadow: none;
+    border: solid 0.5px #05598d99;
 }
 
 .footer {
@@ -155,6 +167,7 @@ table {
     font-weight: 25rem;
 }
 
+
 .more-container {
     /* margin-top: auto; */
     background-color: #02809046;
@@ -167,7 +180,7 @@ table {
     box-shadow: inset 0px 0px 3.5px 0.5px #00a896ab;
 }
 
-img {
+.on-board-img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -185,4 +198,29 @@ img {
     display: inline;
     width: 30%;
     margin: 0;
+}
+
+.hint-container {
+    color: #eff0d4;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.hint-container img {
+    height: 2rem;
+    margin: 1rem;
+    cursor: pointer;
+    /* justify-self: start; */
+}
+
+.hint {
+    cursor: pointer;
+    
+}
+
+.safe-cell{
+    background-color: #0dff0038;
+    border: solid 0.5px #00a84182;
+    box-shadow: inset 0px 0px 3.5px 0.5px #00a81c;
 }

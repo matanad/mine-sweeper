@@ -43,7 +43,7 @@ function getEmptyCells(board) {
     const cells = []
     for (var i = 0; i < board.length; i++) {
         for (var j = 0; j < board[i].length; j++) {
-            if (!board[i][j].isMine) {
+            if (!board[i][j].isMine && !board[i][j].isShown) {
                 cells.push({ i, j })
             }
         }
@@ -51,7 +51,7 @@ function getEmptyCells(board) {
     return cells[0] ? cells : null
 }
 
-function drawCell(cells) {
+function drawRandomCell(cells) {
     var randIdx = getRandomInt(0, cells.length)
     return cells.splice(randIdx, 1)[0]
 }
@@ -63,3 +63,12 @@ function getCellLocation(elCell) {
 
 }
 
+function setMinesNegsCount(board) {
+    for (var iPos = 0; iPos < gLevel.SIZE; iPos++) {
+        for (var jPos = 0; jPos < gLevel.SIZE; jPos++) {
+            const currCell = board[iPos][jPos]
+            currCell.minesAroundCount = checkMinesNegsCount(board, iPos, jPos)
+            currCell.color = getNumColor(currCell.minesAroundCount)
+        }
+    }
+}
