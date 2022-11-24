@@ -153,9 +153,11 @@ table {
 
 .lives {
     display: inline-block;
-    width: 7.125em;
+    width: 5.125em;
     height: 2.5em;
+    line-height: 2em;
 }
+
 
 .footer {
     display: block;
@@ -231,10 +233,10 @@ table {
         width: 22em;
     }
     
-}
-
-li {
-    width: 5rem;
-    padding: 1rem;
-    font-size: .7rem;
+    li {
+        width: 5rem;
+        padding: 1rem;
+        font-size: .7rem;
+    }
+    
 }
