@@ -4,6 +4,16 @@ var isSafeProcces = false
 
 function onSafeClick(elSafe) {
     if (gGame.safeClicks === 0 || isSafeProcces || !gGame.isOn) return
+    if (gGame.isHint || gGame.isManualMode) return
+
+    if (gGame.isFirstClick) {
+        var randomFirstCell = {
+            i: getRandomInt(0, gLevel.SIZE),
+            j: getRandomInt(0, gLevel.SIZE)
+        }
+        firstMove(randomFirstCell.i, randomFirstCell.j)
+        gGame.isFirstClick = false
+    }
 
     isSafeProcces = true
     gGame.safeClicks--

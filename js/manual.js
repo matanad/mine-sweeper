@@ -15,6 +15,7 @@ function onManualMode(elManual) {
     }
 
     if (!gGame.isFirstClick) return
+    if (gGame.isHint) return
 
 
     if (gGame.isManualMode) {
@@ -54,5 +55,6 @@ function renderManualBtnOnInit() {
     const elManual = document.querySelector('.manual')
     elManual.style.opacity = '1'
     elManual.style.cursor = 'pointer'
+    elManual.style.boxShadow = 'none'
     gPlacedMines = 0
 }

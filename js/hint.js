@@ -1,21 +1,23 @@
 'use strict'
 
-const HINT = '💡'
+const HINT = '<img src="img/lightOff.png">'
+const HINT_ACTIVE = '<img src="img/lightOn.png">'
+
 
 function onHintClicked(elHint) {
-    if (gGame.isFirstClick) return
+    if (gGame.isManualMode) return
+    if (!gGame.isOn) return
     if (gGame.hints === 0) return
     gGame.isHint = !gGame.isHint
-    if (!gGame.isHint) {
-        renderHints()
-        return
-    }
-
     renderHints()
 
 }
 
 function onHintCellCLicked(iPos, jPos) {
+    if (gGame.isFirstClick) {
+        firstMove(iPos, jPos)
+        gGame.isFirstClick = false
+    }
     gGame.isHint = !gGame.isHint
     const revealedCells = []
     for (var i = iPos - 1; i <= iPos + 1; i++) {
@@ -47,10 +49,13 @@ function onHintCellCLicked(iPos, jPos) {
 }
 
 function renderHints() {
-    const elHint = document.querySelector('.hint')
+    const elHint = document.querySelector('.hint-container')
     var hintsStr = ''
     for (var i = 1; i <= gGame.hints; i++) {
-        hintsStr += HINT
+        if (i === gGame.hints) {
+            if (gGame.isHint) hintsStr += HINT_ACTIVE
+            else hintsStr += HINT
+        } else hintsStr += HINT
     }
     elHint.innerHTML = hintsStr
 }

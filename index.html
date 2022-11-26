@@ -23,15 +23,15 @@
                 <h2 class="time"><span class="time">000</span><img class="timer" src="img/timer.png"></h2>
 
                 <h2 class="smile" onclick="initGame()">😃</h2>
-                <h2 class="lives"></h2>
+                <div class="lives-container"></div>
             </div>
         </div>
         <div class="board-container" oncontextmenu="return false;">
 
         </div>
-        <div class="hint-container">
+        <div class="extras-container">
             <!-- <img class="seven" src="img/seven.png"> -->
-            <span class="hint" onclick="onHintClicked(this)">💡💡💡</span>
+            <div class="hint-container" onclick="onHintClicked(this)">💡💡💡</div>
             <img class="safe"onclick="onSafeClick(this)" src="img/megaHint.png">
             <img class="manual"onclick="onManualMode(this)" src="img/manual.png">
             <!-- <img class="undo" src="img/undo.png">

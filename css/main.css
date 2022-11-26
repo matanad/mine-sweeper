@@ -125,6 +125,12 @@ table {
     border: solid 0.5px #05598d99;
 }
 
+.mine-clicked {
+    background-color: #c33c54;
+    box-shadow: none;
+    border: solid 0.5px #8d052799;
+}
+
 .footer {
     bottom: 0;
     color: #eff0d4;
@@ -189,7 +195,6 @@ table {
 
 .time {
     margin-left: 1em;
-    display: block;
     margin: 2px 0 0 0;
 }
 
@@ -199,23 +204,28 @@ table {
     margin: 0;
 }
 
-.hint-container {
+.extras-container {
     color: #eff0d4;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-.hint-container img {
+.extras-container img {
     height: 2rem;
     margin: 1rem;
     cursor: pointer;
-    /* justify-self: start; */
 }
 
-.hint {
+.hint-container {
+    display: inline-flex;
+    width: 6rem;
     cursor: pointer;
+}
 
+.hint-container img {
+    margin: 0;
+    padding: 0;
 }
 
 .safe-cell {
@@ -224,19 +234,28 @@ table {
     box-shadow: inset 0px 0px 3.5px 0.5px #00a81c;
 }
 
+.lives-container {
+    display: inline-flex;
+}
+
+.lives-container img {
+    height: 2.5rem;
+}
+
+@media only screen and (max-width: 1550px) {
+    html {
+        font-size: 0.74rem;
+    }
+}
+
 @media only screen and (max-width: 700px) {
     html {
         font-size: 0.7rem;
     }
+}
 
-    .more-container {
-        width: 22em;
-    }
-    
-    li {
-        width: 5rem;
-        padding: 1rem;
-        font-size: .7rem;
-    }
-    
+.time-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }

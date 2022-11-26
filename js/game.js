@@ -3,7 +3,7 @@
 const EMPTY = ' '
 const MINE = '<img class="on-board-img" src="img/mine.png">'
 const FLAG = '<img class="on-board-img" src="img/flag.png">'
-const LIVE = '❤️'
+const LIVE = '<img src="img/heart.png">'
 const NORMAL = '😃'
 const LOSE = '🤯'
 const WIN = '😎'
@@ -26,7 +26,7 @@ function initGame() {
     gGame = {
         isOn: true,
         isFirstClick: true,
-        isHintMode: false,
+        isHint: false,
         isManualMode: false,
         shownCount: 0,
         mineShownCount: 0,
@@ -41,7 +41,7 @@ function initGame() {
     renderHints()
     if (gBombInterval) clearInterval(gBombInterval)
     if (gTimerInterval) clearInterval(gTimerInterval)
-    
+
     // 
     gBoard = buildBoard()
     renderBoard(gBoard, '.board-container')
@@ -58,17 +58,20 @@ function renderStats() {
     const elSafeBtn = document.querySelector('.safe')
     elSafeBtn.style.opacity = 1
 
-    // render hearts
-    const elLives = document.querySelector('.lives')
-    elLives.innerText = LIVE + LIVE + LIVE
-    // if (gLevel.MINES > 2) {
-    //     elLives.innerText += LIVE
-    //     gGame.lives = 3
-    // }
+    renderLives()
 
     document.querySelector('h2 .time').innerText = '000'
     const elSmile = document.querySelector('.smile')
     elSmile.innerText = NORMAL
+}
+
+function renderLives() {
+    const elLives = document.querySelector('.lives-container')
+    var livesStr = ''
+    for (var i = 1; i <= gGame.lives; i++) {
+        livesStr += LIVE
+    }
+    elLives.innerHTML = livesStr
 }
 
 function buildBoard() {
@@ -94,7 +97,7 @@ function cellClicked(elCell, i, j) {
     if (currCell.isShown || currCell.isMarked || !gGame.isOn) return
 
 
-    if (gGame.isHint && gGame.shownCount !== 0) return onHintCellCLicked(i, j)
+    if (gGame.isHint) return onHintCellCLicked(i, j)
     if (gGame.isManualMode) return manualModeClicked(elCell, i, j)
 
     const elSmile = document.querySelector('.smile')
@@ -111,7 +114,7 @@ function cellClicked(elCell, i, j) {
         currCell.isShown = true
         elCell.innerHTML = MINE
         onMineClick()
-        elCell.style.backgroundColor = '#c33c54'
+        elCell.classList.add('mine-clicked')
         gGame.mineShownCount++
         if (checkGameOver()) gameOver(false)
         return
@@ -227,10 +230,8 @@ function locateMines(board, iPos, jPos) {
 }
 
 function onMineClick() {
-    var live = document.querySelector('.lives').innerText
-    live = live.slice(2)
-    document.querySelector('.lives').innerText = live
     gGame.lives--
+    renderLives()
     if (gGame.lives > 0) return
 
     bombAllMines()
