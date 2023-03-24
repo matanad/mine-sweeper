@@ -10,10 +10,10 @@ Do you like puzzles, explosions and fun? Then you will love this minesweeper gam
 - If you reveal a mine, you lose a life
 - If you lose all your lives, you lose the game
 - If you flag all the mines correctly, you win the game
-- You can choose the size of the grid and the number of mines
+- You can choose the difficult level of the game
 - You can also hand place the mines before starting the game
 - You have three hints that you can use to reveal a random tile
-- The game tracks your time and score
+- The game tracks your time
 
 ## How to play
 
