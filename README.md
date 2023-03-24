@@ -17,8 +17,8 @@ Do you like puzzles, explosions and fun? Then you will love this minesweeper gam
 
 ## How to play 🕹️
 
-- Clone or download this repository
-- Open the index.html file in your browser
+- You can play the game online by clicking this link: https://matanad.github.io/mine-sweeper/
+- Or you can clone or download this repository and open the index.html file in your browser
 - Enjoy! 😊
 
 ## Credits 🙌
