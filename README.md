@@ -13,6 +13,7 @@ Do you like puzzles, explosions and fun? Then you will love this minesweeper gam
 - You can choose the difficult level of the game
 - You can also hand place the mines before starting the game ✋🏼
 - You have three hints that you can use to reveal a random tile 🔎
+- You also have another hint that reveals the clicked cell and the cells around it 🌟
 - The game tracks your time ⏱️
 
 ## How to play 🕹️
