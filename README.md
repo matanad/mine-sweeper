@@ -21,13 +21,6 @@ Do you like puzzles, explosions and fun? Then you will love this minesweeper gam
 - Open the index.html file in your browser
 - Enjoy!
 
-## Screenshots
-
-![Screenshot 1](screenshot1.png)
-![Screenshot 2](screenshot2.png)
-
 ## Credits
 
-- This project was made by me, [your name], as part of [bootcamp name]
-- The icons and images were taken from [source name]
-- The sound effects were taken from [source name]
+- This project was made by me, Matan Adi, as part of Coding Academy Israel bootcamp
